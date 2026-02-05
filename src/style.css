@@ -1,0 +1,75 @@
+ h2 {
+     text-align: center;
+     font-weight: 700;
+     font-size: 25px;
+     background-color: rgb(27 69 141);
+     margin: 0px;
+     padding: 20px;
+     color: white;
+ }
+
+ .container-box {
+     display: grid;
+     grid-template-columns: 1fr;
+     gap: 20px;
+     width: 100%;
+ }
+
+ #myTable th {
+     background-color: rgb(204, 204, 204);
+ }
+
+ #map {
+     width: 100% !important;
+     height: 850px;
+     min-height: 870px;
+     border: 5px solid rgb(66, 66, 66);
+ }
+
+ .container-buttons {
+     display: flex;
+ }
+
+ .show-btn {
+     color: white;
+      background-color: rgb(53, 117, 227);
+     padding: 5px;
+     margin: 2px;
+     border-radius: 5px;
+     border: solid rgb(53, 117, 227);
+ }
+
+ .show-btn:hover {
+    color: white;
+     background-color: rgb(2, 92, 247);
+     cursor: pointer;
+ }
+
+ .hide-btn {
+     color: white;
+     background-color: rgb(95, 97, 98);
+     padding: 5px;
+     margin: 2px;
+     border-radius: 5px;
+     border: solid rgb(95, 97, 98);
+ }
+
+ .hide-btn:hover {
+     background-color: rgb(56, 58, 58);
+     cursor: pointer;
+ }
+
+ @media (min-width: 768px) {
+     .container-box {
+         grid-template-columns: 1fr 1fr;
+     }
+ }
+
+ /* Clase para resaltar la fila */
+ .row-active td .show-btn {
+     background-color: rgb(17 165 33) !important;
+     /* Un azul muy claro */
+     transition: background-color 0.3s ease;
+     border: solid rgb(17 165 33);
+     color: white;
+ }
