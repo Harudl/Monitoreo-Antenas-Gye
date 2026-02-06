@@ -5,8 +5,6 @@ mapboxgl.accessToken = "pk.eyJ1IjoiYW5kcmVzeGF2aWVyOTkiLCJhIjoiY20zbWUyMWdqMTFzZ
 let map: mapboxgl.Map;
 const activeMarkers: { [key: string]: mapboxgl.Marker } = {};
 
-console.log("inicio", activeMarkers);
-
 export function initMap(): void {
     map = new mapboxgl.Map({
         container: "map",
@@ -16,37 +14,52 @@ export function initMap(): void {
     });
 }
 
-export function showAntennaOnMap(antena: Antena): void {
+export function showAntennaLocation(antena: Antena): void {
 
     if (activeMarkers[antena.id]) {
         map.flyTo({ center: [antena.longitude, antena.latitude], zoom: 16 });
         return;
     }
-    //console.log("inicio", activeMarkers);
-    const marker = new mapboxgl.Marker({ color: '#f72e13' })
+    let marker = new mapboxgl.Marker({ color: '#f72e13' })
         .setLngLat([antena.longitude, antena.latitude])
-        .setPopup(new mapboxgl.Popup().setHTML(`
-        <div style="color: black;">
+        .addTo(map);
+
+    const popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false,
+    })
+
+
+    let infoPopup: string = `<div style="color: black;">
             <b>Name:</b> ${antena.name}<br>
             <b>Operator:</b> ${antena.operator}<br>
             <b>Type:</b> ${antena.type}<br>
             <b>Status:</b> ${antena.status}<br>
             <b>Powe (Kw):</b> ${antena.powerKw}<br>
             <b>Neighborhood:</b> ${antena.neighborhood}<br>
-        </div>
-    `))
-        .addTo(map);
+        </div>`;
 
+    marker.getElement().addEventListener("mouseenter", () => {
+        map.getCanvas().style.cursor = 'pointer';
+        popup.setLngLat([antena.longitude, antena.latitude]).setHTML(infoPopup).addTo(map);
+    });
+
+    marker.getElement().addEventListener("mouseleave", () => {
+        map.getCanvas().style.cursor = '';
+        popup.remove();
+    });
+
+    console.log(activeMarkers);
     activeMarkers[antena.id] = marker;
-
+    console.log("inicio", activeMarkers);
     map.flyTo({
         center: [antena.longitude, antena.latitude],
-        zoom: 16,
+        zoom: 12,
         essential: true
     });
 }
 
-export function hideAntennaFromMap(id: string): void {
+export function hideAntennaLocation(id: string): void {
     let marker = activeMarkers[id]
     if (marker) {
         marker.remove();

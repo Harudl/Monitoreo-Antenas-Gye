@@ -8,7 +8,7 @@ export const AntenaPowerKw = z.enum([
 
 export const AntenaSchema = z.object(  {
   id: z.string(),
-  name: z.string(),
+  name: z.string().min(2,"Customer name must have at least 2 characters"),
   code:z.string(),
   operator: z.string(),
   type:z.string(),
