@@ -44,7 +44,7 @@ function refreshOrdersTable() {
 
 }
 
-const tableElement = document.querySelector('#myTable') as HTMLTableElement;
+const tableElement = document.getElementById('myTable') as HTMLTableElement;
 
 tableElement.addEventListener('click', (e: MouseEvent) => {
   const target = e.target as HTMLElement;
