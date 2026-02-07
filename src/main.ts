@@ -28,7 +28,7 @@ let antenasTable = new DataTable("#myTable", {
     {
       title: "Actions",
       data: null,
-      render: (data: Antena) => `<div class="container-buttons">
+      render: (data) => `<div class="container-buttons">
     <button title="Show Location" class="btn show-btn" data-id="${data.id}">Show</button>
     <button title="Hide Location" class="btn hide-btn" data-id="${data.id}">Hide</button>
     </div>`,
@@ -52,27 +52,26 @@ tableElement.addEventListener('click', (e: MouseEvent) => {
   
   if (!id) return;
  
-  const antennaData = antenas.find(antena => antena.id == id);
+  const antennaData: Antena | undefined = antenas.find(antena => antena.id == id);
 
   if (target.classList.contains('show-btn') && antennaData) {
     showAntennaLocation(antennaData);
-    activeRowMarker(id, true);
+    activeButtonMarker(id, true);
   }
   
   if (target.classList.contains('hide-btn')) {
     hideAntennaLocation(id);
-    activeRowMarker(id, false);
+    activeButtonMarker(id, false);
   }
 });
 
-function activeRowMarker(id: string, activate: boolean) {
-  const boton = document.querySelector(`.show-btn[data-id="${id}"]`);
-  const row = boton ? boton.closest('tr') : null ;
-  if (row) {
+function activeButtonMarker(id: string, activate: boolean): void {
+  const boton = tableElement.querySelector(`.show-btn[data-id="${id}"]`) as HTMLButtonElement;
+  if (boton) {
     if (activate) {
-      row.classList.add('row-active');
+      boton.classList.add('active-style');
     } else {
-      row.classList.remove('row-active');
+      boton.classList.remove('active-style');
     }
   }
 }

@@ -65,10 +65,8 @@
      }
  }
 
- /* Clase para resaltar la fila */
- .row-active td .show-btn {
+.active-style {
      background-color: rgb(17 165 33) !important;
-     /* Un azul muy claro */
      transition: background-color 0.3s ease;
      border: solid rgb(17 165 33);
      color: white;

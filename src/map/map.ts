@@ -14,7 +14,7 @@ export function initMap(): void {
     });
 }
 
-export function showAntennaLocation(antena: Antena): void {
+export function showAntennaLocation(antena: Antena): void { 
 
     if (activeMarkers[antena.id]) {
         map.flyTo({ center: [antena.longitude, antena.latitude], zoom: 16 });
@@ -49,9 +49,8 @@ export function showAntennaLocation(antena: Antena): void {
         popup.remove();
     });
 
-    console.log(activeMarkers);
+    //console.log(activeMarkers);
     activeMarkers[antena.id] = marker;
-    console.log("inicio", activeMarkers);
     map.flyTo({
         center: [antena.longitude, antena.latitude],
         zoom: 12,
